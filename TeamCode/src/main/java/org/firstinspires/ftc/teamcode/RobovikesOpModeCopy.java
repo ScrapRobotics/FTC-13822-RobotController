@@ -11,6 +11,8 @@ public class RobovikesOpModeCopy extends OpMode {
     private DcMotor BLM;
     private DcMotor FLM;
 
+    private DcMotor Shooter;
+
 
     @Override
     public void init() {
@@ -19,7 +21,7 @@ public class RobovikesOpModeCopy extends OpMode {
         FRM = hardwareMap.get(DcMotor.class, ("FRM"));
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
         FLM = hardwareMap.get(DcMotor.class, ("FLM"));
-
+        Shooter = hardwareMap.get(DcMotor.class, ("Shooter"));
 
     }
 //todo-after input stops, reverse motor a bit
@@ -31,6 +33,7 @@ public class RobovikesOpModeCopy extends OpMode {
         double leftPower = gamepad1.left_stick_y;
         float lTrig = gamepad1.left_trigger;
         float rTrig = gamepad1.right_trigger;
+        boolean x = gamepad1.x;
         leftPower  = Math.max(-1, Math.min(1, leftPower));
         rightPower = -Math.max(-1, Math.min(1, rightPower));
 
@@ -38,7 +41,12 @@ public class RobovikesOpModeCopy extends OpMode {
         FLM.setPower(leftPower);
         FRM.setPower(rightPower);
         BRM.setPower(rightPower);
-
+        if(x) {
+            Shooter.setPower(1);
+        }
+        else {
+            Shooter.setPower(0);
+        }
         //braking - still need to figure out how to make brake true/false based on input?
        /*while(brake){
            if(gamepad1.right_stick_x == 0 && gamepad1.right_stick_y==0){
