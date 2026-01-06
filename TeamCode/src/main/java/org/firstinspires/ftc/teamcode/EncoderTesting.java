@@ -37,7 +37,7 @@ public class EncoderTesting extends LinearOpMode {
             telemetry.update();
             //My name is Tilak and I am gay!!!!!
             //My name is Lonny and I am gay!!!!!
-            //Hi parsa!
+            //Hi parsa! - Parsa is a bum? and gay?
         }
-    }
+        }
 }
