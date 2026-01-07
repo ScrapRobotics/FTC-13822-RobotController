@@ -8,10 +8,10 @@ public class EncoderTesting extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Find a motor in the hardware map named "Arm Motor"
-        private DcMotor motor;
+        DcMotor motor;
 
         motor = hardwareMap.dcMotor.get("BLM");
-
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // Reset the motor encoder so that it reads zero ticks
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
