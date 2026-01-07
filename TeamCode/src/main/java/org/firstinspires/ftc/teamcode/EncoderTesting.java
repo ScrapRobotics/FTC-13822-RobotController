@@ -40,7 +40,6 @@ public class EncoderTesting extends LinearOpMode {
             telemetry.addData("Encoder Revolutions", revolutions);
             telemetry.addData("Encoder Angle (Degrees)", angle);
             telemetry.addData("Encoder Angle - Normalized (Degrees)", angleNormalized);
-            telemetry.addData("CPR: ", motor.getMotorType().getTicksPerRev());
             telemetry.update();
             //ian code kl;'lk;lk;nlmknmlkj;l
         }
