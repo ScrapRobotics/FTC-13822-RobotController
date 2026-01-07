@@ -23,10 +23,13 @@ public class RobovikesOpMode extends OpMode {
         FRM = hardwareMap.get(DcMotor.class, ("FRM"));
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
         FLM = hardwareMap.get(DcMotor.class, ("FLM"));
+        //initialize both motors
         ShooterPrecision = hardwareMap.get(DcMotor.class, ("Shooter_Precision"));
         ShooterPower = hardwareMap.get(DcMotor.class, ("Shooter_Power"));
+        //set both zero power behavior to instantly brake
         ShooterPower.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ShooterPrecision.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //set one motor to operate in reverse
         ShooterPrecision.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
@@ -97,6 +100,7 @@ public class RobovikesOpMode extends OpMode {
         telemetry.addData("FRM", FRM.getPower());
         telemetry.addData("BRM", BRM.getPower());
         telemetry.update();
+        // simple program logic for motor and button
         if (gamepad1.cross){
             ShooterPrecision.setPower(1.0);
             ShooterPower.setPower(1.0);
