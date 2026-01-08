@@ -38,7 +38,7 @@ public class EncoderTesting extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            double CPR = BLM.getMotorType().getTicksPerRev();
+            double CPR = 384.5;
 
             // Get the current position of the motor
             int position = BLM.getCurrentPosition();
@@ -50,26 +50,16 @@ public class EncoderTesting extends LinearOpMode {
             double distance  = circumference* revolutions;
 
 
-            if(gamepad1.a) {
-                BLM.setPower(1);
-            }
-            else {
-                BLM.setPower(0);
-            }
+
             // Show the position of the motor on telemetry
-            telemetry.addData("Encoder Position", position);
-            telemetry.addData("CPR: ", BLM.getMotorType().getTicksPerRev());
-            telemetry.addData("Encoder Revolutions", revolutions);
-            telemetry.addData("Encoder Angle (Degrees)", angle);
-            telemetry.addData("Encoder Angle - Normalized (Degrees)", angleNormalized);
-            telemetry.update();
+
             //ian code kl;'lk;lk;nlmknmlkj;l
 
-            if(distance<1000){
-                BLM.setPower(0.5);
-                FLM.setPower(0.5);
-                BRM.setPower(-0.5);
-                FRM.setPower(-0.5);
+            if(distance>-500){
+                BLM.setPower(-0.5);
+                FLM.setPower(-0.5);
+                BRM.setPower(0.5);
+                FRM.setPower(0.5);
 
             } else {
                 BLM.setPower(0.0);
@@ -77,6 +67,13 @@ public class EncoderTesting extends LinearOpMode {
                 FRM.setPower(0.0);
                 BRM.setPower(0.0);
             }
+            telemetry.addData("Encoder Position", position);
+            telemetry.addData("CPR tested: ", CPR);
+            telemetry.addData("Encoder Revolutions", revolutions);
+            telemetry.addData("Encoder Angle (Degrees)", angle);
+            telemetry.addData("Encoder Angle - Normalized (Degrees)", angleNormalized);
+            telemetry.addData("Distance: ", distance);
+            telemetry.update();
         }
     }
 }
