@@ -74,7 +74,6 @@ public class EncoderTesting extends LinearOpMode {
             telemetry.addData("Encoder Angle - Normalized (Degrees)", angleNormalized);
             telemetry.addData("Distance: ", distance);
             telemetry.update();
-            //ianbum
             //parsaisthatguy
         }
     }
