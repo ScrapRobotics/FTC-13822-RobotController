@@ -24,8 +24,8 @@ public class RobovikesOpMode extends OpMode {
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
         FLM = hardwareMap.get(DcMotor.class, ("FLM"));
         //initialize both motors
-        ShooterPrecision = hardwareMap.get(DcMotor.class, ("Shooter_Precision"));
-        ShooterPower = hardwareMap.get(DcMotor.class, ("Shooter_Power"));
+        ShooterPrecision = hardwareMap.get(DcMotor.class, ("Shooter1"));
+        ShooterPower = hardwareMap.get(DcMotor.class, ("Shooter2"));
         //set both zero power behavior to instantly brake
         ShooterPower.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ShooterPrecision.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -44,35 +44,7 @@ public class RobovikesOpMode extends OpMode {
         float rTrig = gamepad1.right_trigger;
         leftPower  = Math.max(-1, Math.min(1, leftPower));
         rightPower = -Math.max(-1, Math.min(1, rightPower));
-       /* boolean brakel = true;
-        boolean braker = true;
 
-        if(braker) {
-            if (gamepad1.right_stick_y == 0) {
-                BRM.setPower(-BRM.getPower() / 2);
-                FRM.setPower(-FRM.getPower() / 2);
-                BRM.setPower(0);
-                FRM.setPower(0);
-                braker = false;
-
-            }
-        }
-        else if (gamepad1.right_stick_y!=0) {
-            braker=true;
-        }
-        if(brakel) {
-            if (gamepad1.left_stick_y == 0) {
-                BLM.setPower(-BLM.getPower() / 2);
-                FLM.setPower(-FLM.getPower() / 2);
-                BLM.setPower(0);
-                FLM.setPower(0);
-                brakel = false;
-
-            }
-        }
-        else if (gamepad1.left_stick_y!=0) {
-            brakel=true;
-        }*/
         //strafing
         if(lTrig > .5){
             BRM.setPower(1);
