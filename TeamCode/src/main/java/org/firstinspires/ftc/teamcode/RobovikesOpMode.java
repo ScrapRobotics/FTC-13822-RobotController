@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -14,11 +15,15 @@ public class RobovikesOpMode extends OpMode {
     private DcMotor FLM;
     private DcMotor ShooterPrecision;
     private DcMotor ShooterPower;
+    private DcMotor Intake;
+    private CRServo frontServo;
+    private CRServo rearServo;
 
 
     @Override
     public void init() {
-
+        frontServo = hardwareMap.get(CRServo.class, ("front servo"));
+        rearServo = hardwareMap.get(CRServo.class, ("rear servo"));
         BRM = hardwareMap.get(DcMotor.class, ("BRM"));
         FRM = hardwareMap.get(DcMotor.class, ("FRM"));
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
@@ -80,6 +85,14 @@ public class RobovikesOpMode extends OpMode {
         } else {
             ShooterPrecision.setPower(0.0);
             ShooterPower.setPower(0.0);
+        }
+        //intake
+        if(gamepad1.left_bumper){
+            frontServo.setPower(.4);
+            rearServo.setPower(-.4);
+        }else{
+            frontServo.setPower(0);
+            rearServo.setPower(0);
         }
     }
 }
