@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous
-public class autonBasket extends OpMode {
-    //go forward 2ft - under basket
+public class autonRed extends OpMode {
+    //left back 1 front -1
+    //out ~2ft then strafe left - red
     DcMotor BRM;
     DcMotor FRM;
     DcMotor BLM;
@@ -15,7 +14,6 @@ public class autonBasket extends OpMode {
     DcMotor ShooterPrecision;
     DcMotor ShooterPower;
     ElapsedTime runtime = new ElapsedTime();
-
     public void init(){
 
         BRM = hardwareMap.get(DcMotor.class, ("BRM"));
@@ -28,6 +26,13 @@ public class autonBasket extends OpMode {
     }
     public void loop(){
         moveForward.forward(1.5);
+        FRM.setPower(-.5);
+        FLM.setPower(-.5);
+        BRM.setPower(.5);
+        BLM.setPower(.5);
+        while(runtime.seconds() < 1.5) {
+            telemetry.update();
+        }
         requestOpModeStop();
     }
 }

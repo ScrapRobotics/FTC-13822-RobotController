@@ -15,7 +15,6 @@ public class RobovikesOpMode extends OpMode {
     private DcMotor FLM;
     private DcMotor ShooterPrecision;
     private DcMotor ShooterPower;
-    private DcMotor Intake;
     private CRServo frontServo;
     private CRServo rearServo;
 
