@@ -13,6 +13,7 @@ public class autonRed extends OpMode {
     DcMotor FLM;
     DcMotor ShooterPrecision;
     DcMotor ShooterPower;
+    Forward moveF = new Forward();
     ElapsedTime runtime = new ElapsedTime();
     public void init(){
 
@@ -23,16 +24,9 @@ public class autonRed extends OpMode {
         //initialize both motors
         ShooterPrecision = hardwareMap.get(DcMotor.class, ("Shooter1"));
         ShooterPower = hardwareMap.get(DcMotor.class, ("Shooter2"));
+        moveF.moveF(100);
     }
     public void loop(){
-        moveForward.forward(1.5);
-        FRM.setPower(-.5);
-        FLM.setPower(-.5);
-        BRM.setPower(.5);
-        BLM.setPower(.5);
-        while(runtime.seconds() < 1.5) {
-            telemetry.update();
-        }
-        requestOpModeStop();
+
     }
 }
