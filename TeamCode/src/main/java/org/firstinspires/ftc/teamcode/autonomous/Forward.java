@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
+
 @Autonomous
 public class Forward extends LinearOpMode{
     public DcMotor BLM;
     public DcMotor FRM;
     public DcMotor FLM;
     public DcMotor BRM;
-    ElapsedTime runtime = new ElapsedTime();
 
 
     public Forward() {
@@ -45,12 +43,20 @@ public class Forward extends LinearOpMode{
         double distanceMoved = revolutions *circumference;
         double power = FRM.getPower();
         //acceleration
-        while (distanceMoved < distance && power < 0.75) {
+        boolean end = true;
+        while (distanceMoved < distance && power < 0.75 && end) {
             power +=0.05;
             FRM.setPower(power);
             FLM.setPower(-power);
             BRM.setPower(power);
             BLM.setPower(-power);
+            //deceleration
+            if(distance - FRM.getCurrentPosition()/CPR * circumference < 100){
+                end = false;
+            }
+        }
+        while (power > .25){
+            power -= .05;
         }
     }
 
