@@ -45,20 +45,20 @@ public class RobovikesOpMode extends OpMode {
         //strafing
         if(lTrig > .5){
             BRM.setPower(1);
-            FRM.setPower(-1);
-            FLM.setPower(-1);
+            FRM.setPower(-.85);
+            FLM.setPower(-.85);
             BLM.setPower(1);
         }
         else if(rTrig > .5){
             BRM.setPower(-1);
-            FRM.setPower(1);
-            FLM.setPower(1);
+            FRM.setPower(.85);
+            FLM.setPower(.85);
             BLM.setPower(-1);
         }
         else {
             BLM.setPower(leftPower);
-            FLM.setPower(leftPower);
-            FRM.setPower(rightPower);
+            FLM.setPower(leftPower*.85);
+            FRM.setPower(rightPower*.85);
             BRM.setPower(rightPower);
         }
         telemetry.addData("Left Power: ", leftPower);
