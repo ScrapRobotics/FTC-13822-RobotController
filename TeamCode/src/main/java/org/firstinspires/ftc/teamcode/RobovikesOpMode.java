@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 //todo-when theres a ball the power will reduce a bit, detect when that happens and slow down the power
 @TeleOp
@@ -15,14 +14,16 @@ public class RobovikesOpMode extends OpMode {
     private DcMotor FLM;
     private DcMotor ShooterPrecision;
     private DcMotor ShooterPower;
-    private CRServo frontServo;
-    private CRServo rearServo;
+    private CRServo Servo1;
+    private CRServo Servo2;
+    private CRServo Servo3;
 
 
     @Override
     public void init() {
-        frontServo = hardwareMap.get(CRServo.class, ("front servo"));
-        rearServo = hardwareMap.get(CRServo.class, ("rear servo"));
+        Servo1 = hardwareMap.get(CRServo.class, ("Servo1"));
+        Servo2 = hardwareMap.get(CRServo.class, ("Servo2"));
+        Servo3 = hardwareMap.get(CRServo.class, ("Servo3"));
         BRM = hardwareMap.get(DcMotor.class, ("BRM"));
         FRM = hardwareMap.get(DcMotor.class, ("FRM"));
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
@@ -79,11 +80,13 @@ public class RobovikesOpMode extends OpMode {
         }
         //intake
         if(gamepad1.left_bumper){
-            frontServo.setPower(.4);
-            rearServo.setPower(-.4);
+            Servo1.setPower(.4);
+            Servo2.setPower(.4);
+            Servo3.setPower(.4);
         }else{
-            frontServo.setPower(0);
-            rearServo.setPower(0);
+            Servo1.setPower(0);
+            Servo2.setPower(0);
+            Servo3.setPower(0);
         }
     }
 }

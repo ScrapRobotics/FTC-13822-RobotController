@@ -12,17 +12,17 @@ public class Forward extends LinearOpMode{
 
 
     public Forward() {
-
+        BRM = hardwareMap.get(DcMotor.class, ("BRM"));
+        BLM = hardwareMap.get(DcMotor.class, ("BLM"));
+        FRM = hardwareMap.get(DcMotor.class, ("FRM"));
+        FLM = hardwareMap.get(DcMotor.class, ("FLM"));
     }
     @Override
     public void runOpMode(){
 
     }
     public void moveF(int distance){
-        BRM = hardwareMap.get(DcMotor.class, ("BRM"));
-        BLM = hardwareMap.get(DcMotor.class, ("BLM"));
-        FRM = hardwareMap.get(DcMotor.class, ("FRM"));
-        FLM = hardwareMap.get(DcMotor.class, ("FLM"));
+
         BRM.setTargetPosition(distance);
         FRM.setTargetPosition(distance);
         BLM.setTargetPosition(-distance);
