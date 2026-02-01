@@ -15,6 +15,7 @@ public class autonRed extends OpMode {
     DcMotor ShooterPrecision;
     DcMotor ShooterPower;
     Forward moveF;
+    boolean t = true;
     ElapsedTime runtime = new ElapsedTime();
     public void init(){
 
@@ -25,42 +26,59 @@ public class autonRed extends OpMode {
         //initialize both motors
         //moveF = new Forward();
     }
-    public void loop(){
-        int distance = 305;
-        BRM.setTargetPosition(distance);
-        FRM.setTargetPosition(distance);
-        BLM.setTargetPosition(-distance);
-        FLM.setTargetPosition(-distance);
-        FRM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FRM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BRM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BRM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BLM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BLM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FLM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FLM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        double CPR  = 384.5;
-        double diameter = 96;
-        double circumference = Math.PI*diameter;
-        double position = FRM.getCurrentPosition();
-        double revolutions = position/CPR;
-        double distanceMoved = revolutions *circumference;
-        double power = FRM.getPower();
-        //acceleration
-        boolean end = true;
-        while (distanceMoved < distance && power < 0.75 && end) {
-            power +=0.05;
+    public void loop() {
+
+        while (t == true) {
+            int distance = 305;
+            FRM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            BRM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            BLM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            FLM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            BRM.setTargetPosition(distance);
+            FRM.setTargetPosition(distance);
+            BLM.setTargetPosition(-distance);
+            FLM.setTargetPosition(-distance);
+
+            FRM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            BRM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            BLM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            FLM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            double CPR = 384.5;
+            double diameter = 96;
+            double circumference = Math.PI * diameter;
+            double position = FRM.getCurrentPosition();
+            double revolutions = position / CPR;
+            double distanceMoved = revolutions * circumference;
+            double power = FRM.getPower();
+            //acceleration
+            boolean end = true;
+            while (distanceMoved < distance && power < 0.75 && end) {
+                power += 0.05;
+                FRM.setPower(power);
+                FLM.setPower(-power);
+                BRM.setPower(power);
+                BLM.setPower(-power);
+                //deceleration
+                if (distance - FRM.getCurrentPosition() / CPR * circumference < 100) {
+                    end = false;
+                }
+            }
+            while (power > .25) {
+                power -= .05;
+                FRM.setPower(power);
+                FLM.setPower(-power);
+                BRM.setPower(power);
+                BLM.setPower(-power);
+            }
+            t = false;
+            power=0;
             FRM.setPower(power);
             FLM.setPower(-power);
             BRM.setPower(power);
             BLM.setPower(-power);
-            //deceleration
-            if(distance - FRM.getCurrentPosition()/CPR * circumference < 100){
-                end = false;
-            }
-        }
-        while (power > .25){
-            power -= .05;
         }
     }
 }
