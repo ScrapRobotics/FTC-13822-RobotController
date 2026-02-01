@@ -15,15 +15,14 @@ public class RobovikesOpMode extends OpMode {
     private DcMotor ShooterPrecision;
     private DcMotor ShooterPower;
     private CRServo Servo1;
-    private CRServo Servo2;
     private CRServo Servo3;
 
 
     @Override
     public void init() {
         Servo1 = hardwareMap.get(CRServo.class, ("Servo1"));
-        Servo2 = hardwareMap.get(CRServo.class, ("Servo2"));
         Servo3 = hardwareMap.get(CRServo.class, ("Servo3"));
+
         BRM = hardwareMap.get(DcMotor.class, ("BRM"));
         FRM = hardwareMap.get(DcMotor.class, ("FRM"));
         BLM = hardwareMap.get(DcMotor.class, ("BLM"));
@@ -39,26 +38,26 @@ public class RobovikesOpMode extends OpMode {
         double rightPower = gamepad1.right_stick_y;
         float lTrig = gamepad1.left_trigger;
         float rTrig = gamepad1.right_trigger;
-        leftPower  = Math.max(-1, Math.min(1, leftPower));
-        rightPower = -Math.max(-1, Math.min(1, rightPower));
+        leftPower  = -Math.max(-1, Math.min(1, leftPower));
+        rightPower = Math.max(-1, Math.min(1, rightPower));
 
         //strafing
         if(lTrig > .5){
             BRM.setPower(1);
-            FRM.setPower(-.85);
-            FLM.setPower(-.85);
+            FRM.setPower(-1);
+            FLM.setPower(-1);
             BLM.setPower(1);
         }
         else if(rTrig > .5){
             BRM.setPower(-1);
-            FRM.setPower(.85);
-            FLM.setPower(.85);
+            FRM.setPower(1);
+            FLM.setPower(1);
             BLM.setPower(-1);
         }
         else {
             BLM.setPower(leftPower);
-            FLM.setPower(leftPower*.85);
-            FRM.setPower(rightPower*.85);
+            FLM.setPower(leftPower*1);
+            FRM.setPower(rightPower*1);
             BRM.setPower(rightPower);
         }
         telemetry.addData("Left Power: ", leftPower);
@@ -72,8 +71,8 @@ public class RobovikesOpMode extends OpMode {
         telemetry.update();
         // simple program logic for motor and button
         if (gamepad1.cross){
-            ShooterPrecision.setPower(1.0);
-            ShooterPower.setPower(1.0);
+            ShooterPrecision.setPower(.6);
+            ShooterPower.setPower(.8);
         } else {
             ShooterPrecision.setPower(0.0);
             ShooterPower.setPower(0.0);
@@ -81,11 +80,10 @@ public class RobovikesOpMode extends OpMode {
         //intake
         if(gamepad1.left_bumper){
             Servo1.setPower(1);
-            Servo2.setPower(1);
             Servo3.setPower(1);
+
         }else{
             Servo1.setPower(0);
-            Servo2.setPower(0);
             Servo3.setPower(0);
         }
     }
